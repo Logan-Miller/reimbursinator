@@ -79,12 +79,19 @@ function createFormGroup(field) {
             formGroup.appendChild(div);
             break;
         case "date":
+            input.type = "text";
+            input.value = field.value;
+            input.classList.add("form-control");
+            formGroup.appendChild(label);
+            div.appendChild(input);
+            formGroup.appendChild(div);
+            break;
         case "string":
             input.type = "text";
             input.value = field.value;
             input.classList.add("form-control");
             formGroup.appendChild(label);
-            div.appendChild(input)
+            div.appendChild(input);
             formGroup.appendChild(div);
             break;
         case "decimal":
@@ -93,7 +100,7 @@ function createFormGroup(field) {
             input.classList.add("form-control");
             input.pattern = "\\d+(\\.\\d{2})?";
             formGroup.appendChild(label);
-            div.appendChild(input)
+            div.appendChild(input);
             formGroup.appendChild(div);
             break;
         case "integer":
@@ -103,7 +110,7 @@ function createFormGroup(field) {
             input.step = 1;
             input.min = 0;
             formGroup.appendChild(label);
-            div.appendChild(input)
+            div.appendChild(input);
             formGroup.appendChild(div);
             break;
         case "file":
@@ -112,7 +119,7 @@ function createFormGroup(field) {
             let uploadMessage = document.createElement("p");
             uploadMessage.classList.add("form-text");
             uploadMessage.innerHTML = field.value;
-            div.appendChild(input)
+            div.appendChild(input);
             div.appendChild(uploadMessage);
             formGroup.appendChild(label);
             formGroup.appendChild(div);
@@ -334,14 +341,6 @@ function displayReport(parsedData){
     const cardBody = document.createElement("div");
     cardBody.classList.add("card-body");
 
-    /*
-    const displayTable = document.createElement("table");
-    displayTable.classList.add("table table-striped table-responsive-sm");
-    displayTable.style.visibility = "visible";
-    cardBody.appendChild(displayTable);
-*/
-
-
     const sections = parsedData.sections;
     for (let key in sections) {
         let section = sections[key];
@@ -411,3 +410,13 @@ if (newReportForm) {
         this.reset();
     });
 }
+
+function flatpickr(s, param2) {
+    $("#editReportModal").on("show.bs.modal", function (e) {
+        var taskFlatpickrConfig = {
+            enableTime: true,
+            altInput: true,
+            altFormat: "m-d-Y"
+        };
+    var test = flatpickr("#return_date", taskFlatpickrConfig);
+})
