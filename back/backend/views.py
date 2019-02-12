@@ -2,6 +2,8 @@ from rest_framework.decorators import api_view
 from django.http import JsonResponse
 from .models import *
 from .policy import pol
+from django.core.mail import send_mail
+from django.conf import settings
 import os
 
 
@@ -130,6 +132,13 @@ def report_detail(request, report_pk):
 
     # submit the report
     elif request.method == 'PUT':
+        send_mail(
+            'Test email',
+            'Testing sending an email',
+            'teamreimbursinator@gmail.com',
+            ['lmiller@pdx.edu'],
+            fail_silently=False,
+        )
         return JsonResponse({"message": "Report submitted."})
 
     # Delete the report
